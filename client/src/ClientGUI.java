@@ -54,12 +54,18 @@ public class ClientGUI extends JFrame{
         hostBtn = new JButton("Host");
         connectBtn = new JButton("Connect");
         clearBtn = new JButton("Clear");
-        colorBtn = new JButton("Choose Color");
-        penBtn = new JButton("Pen");
-        brushBtn = new JButton("Brush");
+        colorBtn = new JButton();
+        penBtn = new JButton();
+        brushBtn = new JButton();
+
+
+        penBtn.setIcon(new ImageIcon("icons/pen.png"));
+        brushBtn.setIcon(new ImageIcon("icons/brush.jpg"));
+        colorBtn.setIcon(new ImageIcon("icons/palette.png"));
+
+
+
         slider = new JSlider();
-
-
 
         gbc.fill = GridBagConstraints.BOTH;
         gbc.gridheight = 1;
