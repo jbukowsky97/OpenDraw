@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,6 +16,7 @@ public class ClientGUI extends JFrame{
     private JButton colorBtn;
     private JButton penBtn;
     private JButton brushBtn;
+    private JSlider slider;
 
     private Color color;
 
@@ -38,13 +41,16 @@ public class ClientGUI extends JFrame{
 
 
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(6, 1));
+        //buttonPanel.setLayout(new GridLayout(7, 1));
+        buttonPanel.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+
         drawPanel = new DrawPanel(client);
 
         c.fill = GridBagConstraints.BOTH;
         c.gridheight = 1;
         c.gridwidth = 4;
-        c.weightx = .8;
+        c.weightx = .95;
         c.weighty = 1;
         contentPane.add(drawPanel, c);
 
@@ -54,18 +60,44 @@ public class ClientGUI extends JFrame{
         colorBtn = new JButton("Choose Color");
         penBtn = new JButton("Pen");
         brushBtn = new JButton("Brush");
+        slider = new JSlider();
 
-        buttonPanel.add(hostBtn);
-        buttonPanel.add(connectBtn);
-        buttonPanel.add(clearBtn);
-        buttonPanel.add(colorBtn);
-        buttonPanel.add(penBtn);
-        buttonPanel.add(brushBtn);
+
+
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.gridheight = 1;
+        gbc.gridwidth = 1;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        buttonPanel.add(hostBtn, gbc);
+        gbc.gridy = 1;
+        buttonPanel.add(connectBtn, gbc);
+        gbc.gridy = 2;
+        buttonPanel.add(clearBtn, gbc);
+        gbc.gridy = 3;
+        buttonPanel.add(colorBtn, gbc);
+        gbc.gridy = 4;
+        buttonPanel.add(penBtn, gbc);
+        gbc.gridy = 5;
+        buttonPanel.add(brushBtn, gbc);
+
+        gbc.fill = GridBagConstraints.CENTER;
+        gbc.gridy = 6;
+        slider.setSize(100, 20);
+        slider.setValue(10);
+        slider.setMaximum(100);
+        slider.setMinimum(10);
+        slider.setSnapToTicks(true);
+        slider.setPaintTicks(true);
+        slider.setMajorTickSpacing(10);
+        buttonPanel.add(slider, gbc);
 
         c.fill = GridBagConstraints.BOTH;
         c.gridheight = 1;
         c.gridwidth = 1;
-        c.weightx = .2;
+        c.weightx = .05;
         c.weighty = 1;
         contentPane.add(buttonPanel, c);
 
@@ -160,6 +192,12 @@ public class ClientGUI extends JFrame{
             public void actionPerformed(ActionEvent actionEvent) {
                 drawPanel.setMyCommand("brush");
 
+            }
+        });
+
+        slider.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                DrawPanel.setBrushSize(slider.getValue());
             }
         });
 

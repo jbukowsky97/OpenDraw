@@ -24,11 +24,14 @@ public class DrawPanel extends JPanel implements MouseMotionListener, MouseListe
 
     private String myCommand;
 
+    private static int brushSize;
+
 
     public DrawPanel(Client client){
 
         this.color = Color.BLACK;
         this.client = client;
+        this.brushSize = 10;
 
         this.setOpaque(true);
         this.setBackground(Color.WHITE);
@@ -84,12 +87,16 @@ public class DrawPanel extends JPanel implements MouseMotionListener, MouseListe
             int gr = Integer.parseInt(cmd[6]);
             int b = Integer.parseInt(cmd[7]);
             g.setColor(new Color(r, gr, b));
-            g.fillOval(tempX1, tempY1, 10, 10);
-            g.fillOval(tempX2, tempY2, 10, 10);
+            g.fillOval(tempX1, tempY1, brushSize, brushSize);
+            g.fillOval(tempX2, tempY2, brushSize, brushSize);
         }else if (command.equals("clear")) {
             g.setColor(Color.WHITE);
             g.fillRect(0, 0, this.getWidth(), this.getHeight());
         }
+    }
+
+    public static void setBrushSize(int size){
+        brushSize = size;
     }
 
     public void updateColor(Color color) {
