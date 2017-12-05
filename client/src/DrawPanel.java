@@ -22,6 +22,8 @@ public class DrawPanel extends JPanel implements MouseMotionListener, MouseListe
 
     private javax.swing.Timer timer;
 
+    private String myCommand;
+
 
     public DrawPanel(Client client){
 
@@ -38,6 +40,8 @@ public class DrawPanel extends JPanel implements MouseMotionListener, MouseListe
         this.setVisible(true);
 
         first = true;
+
+        myCommand = "line";
 
         commands = Collections.synchronizedList(new LinkedList<String>());
 
@@ -70,6 +74,18 @@ public class DrawPanel extends JPanel implements MouseMotionListener, MouseListe
             int b = Integer.parseInt(cmd[7]);
             g.setColor(new Color(r, gr, b));
             g.drawLine(tempX1, tempY1, tempX2, tempY2);
+        }else if (command.startsWith("brush")) {
+            String[] cmd = command.split(" ");
+            int tempX1 = Integer.parseInt(cmd[1]);
+            int tempY1 = Integer.parseInt(cmd[2]);
+            int tempX2 = Integer.parseInt(cmd[3]);
+            int tempY2 = Integer.parseInt(cmd[4]);
+            int r = Integer.parseInt(cmd[5]);
+            int gr = Integer.parseInt(cmd[6]);
+            int b = Integer.parseInt(cmd[7]);
+            g.setColor(new Color(r, gr, b));
+            g.fillOval(tempX1, tempY1, 10, 10);
+            g.fillOval(tempX2, tempY2, 10, 10);
         }else if (command.equals("clear")) {
             g.setColor(Color.WHITE);
             g.fillRect(0, 0, this.getWidth(), this.getHeight());
@@ -87,13 +103,17 @@ public class DrawPanel extends JPanel implements MouseMotionListener, MouseListe
         //repaint();
     }
 
+    public void setMyCommand(String command){
+        myCommand = command;
+    }
+
     @Override
     public void mouseDragged(MouseEvent e) {
         x2 = e.getX();
         y2 = e.getY();
 
         try {
-            client.sendCommand("line " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue());
+            client.sendCommand(myCommand + " " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue());
             //System.out.println("line " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue());
             //processCommand("line " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue());
         } catch (IOException e1) {
