@@ -126,7 +126,11 @@ public class ClientGUI extends JFrame{
         clearBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-
+                try {
+                    client.sendCommand("clear");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
