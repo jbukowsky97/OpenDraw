@@ -40,6 +40,9 @@ public class ClientHandler extends Thread {
 	* Closes the connection to the client
 	*/
 	private void quit() {
+		// Unsubscribe client
+		forwarder.unsubscribeClient(this);
+		
 		// Clean up resources
 		try {
 			if (controlSocket != null) controlSocket.close();
@@ -112,6 +115,7 @@ public class ClientHandler extends Thread {
 	public ClientHandler(Socket controlSocket, Forwarder forwarder) {
 		this.controlSocket = controlSocket;
 		this.forwarder = forwarder;
+		forwarder.subscribeClient(this);
 
 		try {
 			outToClient = new DataOutputStream(controlSocket.getOutputStream());
