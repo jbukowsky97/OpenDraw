@@ -204,10 +204,10 @@ public class ClientGUI extends JFrame{
             public void windowClosing(WindowEvent e) {
                 // Notify parent of close attempt
                 try {
-                    client.sendCommand("quit");
                     if (server != null) {
                         server.quit();
                     }
+                    client.sendCommand("quit");
 
                 } catch (IOException e1) {
                     e1.printStackTrace();
