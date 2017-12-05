@@ -65,17 +65,13 @@ public class Forwarder extends Thread {
 			while (updates.size() > 0) {
 				String update = updates.pop() + "\n";
 
-				int numClients = 0;
 				for (ListIterator<ClientHandler> iter = clients.listIterator(); iter.hasNext();) {
 					try {
-//						System.out.println("SENDING:\t" + update);
-						numClients++;
 						iter.next().getOutputStream().writeBytes(update);
 					} catch (Exception e) {
 						// Fail quietly
 					}
 				}
-				System.out.println("NUM CLIEnts\t" + numClients);
 			}
 		}
 	}
