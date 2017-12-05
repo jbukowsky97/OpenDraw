@@ -33,7 +33,7 @@ public class Client {
                 try {
                     listen();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                   // e.printStackTrace();
                 }
             }
         };

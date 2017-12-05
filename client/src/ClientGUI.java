@@ -161,7 +161,7 @@ public class ClientGUI extends JFrame{
                         client.connect(ip, port);
                         connectBtn.setEnabled(false);
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        //e.printStackTrace();
                     }
 
 
@@ -176,7 +176,7 @@ public class ClientGUI extends JFrame{
                     client.sendCommand("clear");
                     drawPanel.processCommand("clear");
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    //e.printStackTrace();
                 }
             }
         });
@@ -221,7 +221,7 @@ public class ClientGUI extends JFrame{
                     client.sendCommand("quit");
 
                 } catch (IOException e1) {
-                    e1.printStackTrace();
+                   //e1.printStackTrace();
                 }
             }
 
