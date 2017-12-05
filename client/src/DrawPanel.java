@@ -121,9 +121,9 @@ public class DrawPanel extends JPanel implements MouseMotionListener, MouseListe
         y2 = e.getY();
 
         try {
-            client.sendCommand(myCommand + " " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue() + " " + brushSize);
+            client.sendCommand(myCommand + " " + (x1 - brushSize / 2) + " " + (y1 - brushSize / 2) + " " + (x2 - brushSize / 2) + " " + (y2 - brushSize / 2) + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue() + " " + brushSize);
             //System.out.println("line " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue());
-            processCommand(myCommand + " " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue() + " " + brushSize);
+            processCommand(myCommand + " " + (x1 - brushSize / 2) + " " + (y1 - brushSize / 2) + " " + (x2 - brushSize / 2) + " " + (y2 - brushSize / 2) + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue() + " " + brushSize);
         } catch (IOException e1) {
             //e1.printStackTrace();
         }
@@ -151,9 +151,9 @@ public class DrawPanel extends JPanel implements MouseMotionListener, MouseListe
 
 
         try {
-            client.sendCommand(myCommand + " " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue() + " " + brushSize);
+            client.sendCommand(myCommand + " " + (x1 - brushSize / 2) + " " + (y1 - brushSize / 2) + " " + (x2 - brushSize / 2) + " " + (y2 - brushSize / 2) + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue() + " " + brushSize);
             //System.out.println("line " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue());
-            processCommand(myCommand + " " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue() + " " + brushSize);
+            processCommand(myCommand + " " + (x1 - brushSize / 2) + " " + (y1 - brushSize / 2) + " " + (x2 - brushSize / 2) + " " + (y2 - brushSize / 2) + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue() + " " + brushSize);
         } catch (IOException e1) {
             //e1.printStackTrace();
         }
