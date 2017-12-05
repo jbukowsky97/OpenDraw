@@ -58,9 +58,11 @@ public class ClientGUI extends JFrame{
         penBtn = new JButton();
         brushBtn = new JButton();
 
+        JLabel label = new JLabel("Scale");
+
 
         penBtn.setIcon(new ImageIcon("icons/pen.png"));
-        brushBtn.setIcon(new ImageIcon("icons/brush.jpg"));
+        brushBtn.setIcon(new ImageIcon("icons/brush.png"));
         colorBtn.setIcon(new ImageIcon("icons/palette.png"));
 
 
@@ -85,9 +87,11 @@ public class ClientGUI extends JFrame{
         buttonPanel.add(penBtn, gbc);
         gbc.gridy = 5;
         buttonPanel.add(brushBtn, gbc);
+        gbc.gridy = 6;
+        buttonPanel.add(label, gbc);
 
         gbc.fill = GridBagConstraints.CENTER;
-        gbc.gridy = 6;
+        gbc.gridy = 7;
         slider.setSize(100, 20);
         slider.setValue(10);
         slider.setMaximum(100);
