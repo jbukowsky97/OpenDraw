@@ -27,7 +27,7 @@ public class DrawPanel extends JPanel implements MouseMotionListener, MouseListe
 
     private static int brushSize;
 
-    private Cursor blankCursor;
+  //  private Cursor blankCursor;
 
 
     public DrawPanel(Client client){
@@ -46,12 +46,12 @@ public class DrawPanel extends JPanel implements MouseMotionListener, MouseListe
         this.setVisible(true);
 
 
-        // Transparent 16 x 16 pixel cursor image.
-        BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
-
-        // Create a new blank cursor.
-        blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(
-                cursorImg, new Point(0, 0), "blank cursor");
+//        // Transparent 16 x 16 pixel cursor image.
+//        BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+//
+//        // Create a new blank cursor.
+//        blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(
+//                cursorImg, new Point(0, 0), "blank cursor");
 
 
 
@@ -169,7 +169,7 @@ public class DrawPanel extends JPanel implements MouseMotionListener, MouseListe
     @Override
     public void mousePressed(MouseEvent e) {
 
-        this.setCursor(blankCursor);
+       // this.setCursor(blankCursor);
 
         x1 = e.getX();
         y1 = e.getY();
@@ -200,7 +200,7 @@ public class DrawPanel extends JPanel implements MouseMotionListener, MouseListe
 
     @Override
     public void mouseReleased(MouseEvent e) {
-            this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+            //this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }
 
     @Override
