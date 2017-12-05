@@ -32,7 +32,6 @@ public class ClientGUI extends JFrame{
         client = new Client(this);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
         this.setSize(1000,500);
         JPanel contentPane = new JPanel();
         contentPane.setLayout(new GridBagLayout());
@@ -203,6 +202,8 @@ public class ClientGUI extends JFrame{
 
 
         this.add(contentPane);
+
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
 
 
