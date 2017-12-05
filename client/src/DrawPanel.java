@@ -1,11 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.LinkedList;
 
-public class DrawPanel extends JPanel implements MouseMotionListener, MouseListener {
+public class DrawPanel extends JPanel implements MouseMotionListener, MouseListener, ActionListener {
 
     private int x1,x2,y1,y2;
 
@@ -15,6 +15,12 @@ public class DrawPanel extends JPanel implements MouseMotionListener, MouseListe
     private String command;
 
     private boolean first;
+
+    private Graphics2D graphics2D;
+
+    private java.util.List<String> commands;
+
+    private javax.swing.Timer timer;
 
 
     public DrawPanel(Client client){
@@ -33,17 +39,27 @@ public class DrawPanel extends JPanel implements MouseMotionListener, MouseListe
 
         first = true;
 
+        commands = Collections.synchronizedList(new LinkedList<String>());
+
+        timer = new javax.swing.Timer(5, this);
+        timer.start();
     }
 
 
     public void paintComponent(Graphics g) {
         if (first) {
             super.paintComponent(g);
+            g.setColor(Color.WHITE);
+            g.fillRect(0, 0, this.getWidth(), this.getHeight());
             first = false;
         }
-        if (command == null) {
 
-        }else if (command.startsWith("line")) {
+        if (commands.size() == 0) {
+            return;
+        }
+        command = commands.get(0);
+        commands.remove(0);
+        if (command.startsWith("line")) {
             String[] cmd = command.split(" ");
             int tempX1 = Integer.parseInt(cmd[1]);
             int tempY1 = Integer.parseInt(cmd[2]);
@@ -65,8 +81,10 @@ public class DrawPanel extends JPanel implements MouseMotionListener, MouseListe
     }
 
     public void processCommand(String command) {
-        this.command = command;
-        repaint();
+        //this.command = command;
+        System.out.println("adding command");
+        commands.add(command);
+        //repaint();
     }
 
     @Override
@@ -77,7 +95,7 @@ public class DrawPanel extends JPanel implements MouseMotionListener, MouseListe
         try {
             client.sendCommand("line " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue());
             //System.out.println("line " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue());
-            processCommand("line " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue());
+            //processCommand("line " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue());
         } catch (IOException e1) {
             e1.printStackTrace();
         }
@@ -120,5 +138,10 @@ public class DrawPanel extends JPanel implements MouseMotionListener, MouseListe
     @Override
     public void mouseExited(MouseEvent e) {
 
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
+        repaint();
     }
 }
