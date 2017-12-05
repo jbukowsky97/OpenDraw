@@ -19,6 +19,15 @@ public class ClientHandler extends Thread {
 	private Forwarder forwarder;
 	
 	/**
+	 * Provides the clients IP address
+	 * 
+	 * @return The IP address of the client
+	 */
+	public String getIP() {
+		return controlSocket.getInetAddress().toString();
+	}
+	
+	/**
 	 * Provides the OutputStream of to this client
 	 * 
 	 * @return The DataOutputStream of this object
@@ -31,6 +40,9 @@ public class ClientHandler extends Thread {
 	* Closes the connection to the client
 	*/
 	private void quit() {
+		// Unsubscribe client
+		forwarder.unsubscribeClient(this);
+		
 		// Clean up resources
 		try {
 			if (controlSocket != null) controlSocket.close();

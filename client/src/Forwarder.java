@@ -60,6 +60,7 @@ public class Forwarder extends Thread {
 			updates.remove(0);
 
 			for (ListIterator<ClientHandler> iter = clients.listIterator(); iter.hasNext();) {
+				System.out.println("Sending: " + iter.next().getIP());
 				try {
 					System.out.println("SENDING:\t" + update);
 					iter.next().getOutputStream().writeBytes(update);
