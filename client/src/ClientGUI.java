@@ -19,6 +19,8 @@ public class ClientGUI extends JFrame{
 
     private Client client;
 
+    private Server server;
+
     public ClientGUI(){
 
         color = Color.BLACK;
@@ -81,6 +83,8 @@ public class ClientGUI extends JFrame{
                 if (n == JOptionPane.OK_OPTION) {
                     //String ip = ipText.getText();
                     int port = Integer.parseInt(portText.getText());
+                    server = new Server(port);
+                    server.start();
                 }
             }
         });

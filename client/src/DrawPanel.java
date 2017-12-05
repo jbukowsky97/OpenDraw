@@ -34,7 +34,9 @@ public class DrawPanel extends JPanel implements MouseMotionListener, MouseListe
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if (command.startsWith("line")) {
+        if (command == null) {
+
+        }else if (command.startsWith("line")) {
             String[] cmd = command.split(" ");
             int tempX1 = Integer.parseInt(cmd[1]);
             int tempY1 = Integer.parseInt(cmd[2]);

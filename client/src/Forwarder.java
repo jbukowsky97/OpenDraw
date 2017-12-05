@@ -20,6 +20,7 @@ public class Forwarder extends Thread {
 	 */
 	public Forwarder() {
 		clients = new ArrayList<>();
+		updates = new LinkedList<String>();
 	}
 	
 	/**

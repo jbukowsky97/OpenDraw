@@ -21,6 +21,7 @@ public class Server extends Thread {
 	 */
 	public Server(int port) {
 		this.port = port;
+		this.forwarder = new Forwarder();
 	}
 	
 	/**
