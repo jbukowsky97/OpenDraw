@@ -86,9 +86,10 @@ public class DrawPanel extends JPanel implements MouseMotionListener, MouseListe
             int r = Integer.parseInt(cmd[5]);
             int gr = Integer.parseInt(cmd[6]);
             int b = Integer.parseInt(cmd[7]);
+            int bSize = Integer.parseInt(cmd[8]);
             g.setColor(new Color(r, gr, b));
-            g.fillOval(tempX1, tempY1, brushSize, brushSize);
-            g.fillOval(tempX2, tempY2, brushSize, brushSize);
+            g.fillOval(tempX1, tempY1, bSize, bSize);
+            g.fillOval(tempX2, tempY2, bSize, bSize);
         }else if (command.equals("clear")) {
             g.setColor(Color.WHITE);
             g.fillRect(0, 0, this.getWidth(), this.getHeight());
@@ -120,11 +121,9 @@ public class DrawPanel extends JPanel implements MouseMotionListener, MouseListe
         y2 = e.getY();
 
         try {
-            client.sendCommand(myCommand + " " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue());
-            client.sendCommand(myCommand + " " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue());
-            client.sendCommand(myCommand + " " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue());
+            client.sendCommand(myCommand + " " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue() + " " + brushSize);
             //System.out.println("line " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue());
-            processCommand(myCommand + " " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue());
+            processCommand(myCommand + " " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue() + " " + brushSize);
         } catch (IOException e1) {
             e1.printStackTrace();
         }
