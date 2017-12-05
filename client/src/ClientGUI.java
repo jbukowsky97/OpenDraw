@@ -65,12 +65,11 @@ public class ClientGUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 //create text fields
-                JTextField ipText = new JTextField();
+                //JTextField ipText = new JTextField();
                 JTextField portText = new JTextField();
 
                 //create message for optionpane
-                Object[] message = {"Server ip: ", ipText,
-                        "Server Port: ", portText
+                Object[] message = {"Server Port: ", portText
                 };
 
                 //open optionpane and set result to n
@@ -80,7 +79,7 @@ public class ClientGUI extends JFrame{
 
                 //create serverInfo object if OK is pressed
                 if (n == JOptionPane.OK_OPTION) {
-                    String ip = ipText.getText();
+                    //String ip = ipText.getText();
                     int port = Integer.parseInt(portText.getText());
                 }
             }
