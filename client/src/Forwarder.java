@@ -67,7 +67,7 @@ public class Forwarder extends Thread {
 
 				for (ListIterator<ClientHandler> iter = clients.listIterator(); iter.hasNext();) {
 					try {
-						System.out.println("SENDING:\t" + update);
+//						System.out.println("SENDING:\t" + update);
 						iter.next().getOutputStream().writeBytes(update);
 					} catch (Exception e) {
 						// Fail quietly

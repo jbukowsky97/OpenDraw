@@ -82,7 +82,7 @@ public class DrawPanel extends JPanel implements MouseMotionListener, MouseListe
 
     public void processCommand(String command) {
         //this.command = command;
-        System.out.println("adding command");
+//        System.out.println("adding command");
         commands.add(command);
         //repaint();
     }
@@ -95,7 +95,7 @@ public class DrawPanel extends JPanel implements MouseMotionListener, MouseListe
         try {
             client.sendCommand("line " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue());
             //System.out.println("line " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue());
-            //processCommand("line " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue());
+            processCommand("line " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue());
         } catch (IOException e1) {
             e1.printStackTrace();
         }
