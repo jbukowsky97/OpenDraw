@@ -43,7 +43,7 @@ public class Client {
     public void sendCommand(String command) throws IOException {
         if (running) {
             out.writeBytes(command + "\n");
-           // out.flush();
+            out.flush();
         }
     }
 
