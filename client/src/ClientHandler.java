@@ -79,7 +79,7 @@ public class ClientHandler extends Thread {
 				String[] params = command.split(" ");
 
 				// params[0] -> command
-				if (params[0].toLowerCase().equals("line")) {
+				if (params[0].toLowerCase().equals("line") || params[0].toLowerCase().equals("brush")) {
 					// params[1] -> x1
 					// params[2] -> y1
 					// params[3] -> x2

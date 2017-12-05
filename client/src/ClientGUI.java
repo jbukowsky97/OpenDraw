@@ -12,6 +12,8 @@ public class ClientGUI extends JFrame{
     private JButton connectBtn;
     private JButton clearBtn;
     private JButton colorBtn;
+    private JButton penBtn;
+    private JButton brushBtn;
 
     private Color color;
 
@@ -36,7 +38,7 @@ public class ClientGUI extends JFrame{
 
 
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(4, 1));
+        buttonPanel.setLayout(new GridLayout(6, 1));
         drawPanel = new DrawPanel(client);
 
         c.fill = GridBagConstraints.BOTH;
@@ -50,11 +52,15 @@ public class ClientGUI extends JFrame{
         connectBtn = new JButton("Connect");
         clearBtn = new JButton("Clear");
         colorBtn = new JButton("Choose Color");
+        penBtn = new JButton("Pen");
+        brushBtn = new JButton("Brush");
 
         buttonPanel.add(hostBtn);
         buttonPanel.add(connectBtn);
         buttonPanel.add(clearBtn);
         buttonPanel.add(colorBtn);
+        buttonPanel.add(penBtn);
+        buttonPanel.add(brushBtn);
 
         c.fill = GridBagConstraints.BOTH;
         c.gridheight = 1;
@@ -139,6 +145,21 @@ public class ClientGUI extends JFrame{
             public void actionPerformed(ActionEvent actionEvent) {
                 color = JColorChooser.showDialog(null, "Choose a color", color);
                 drawPanel.updateColor(color);
+            }
+        });
+
+        penBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                drawPanel.setMyCommand("line");
+
+            }
+        });
+        brushBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                drawPanel.setMyCommand("brush");
+
             }
         });
 
