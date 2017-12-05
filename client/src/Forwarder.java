@@ -76,4 +76,14 @@ public class Forwarder extends Thread {
 		}
 	}
 
+	public void quit() {
+		for (ListIterator<ClientHandler> iter = clients.listIterator(); iter.hasNext();) {
+			try {
+				iter.next().getOutputStream().writeBytes("quit\n");
+			} catch (Exception e) {
+				// Fail quietly
+			}
+		}
+	}
+
 }

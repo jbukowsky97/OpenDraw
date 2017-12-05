@@ -23,6 +23,10 @@ public class Server extends Thread {
 		this.port = port;
 		this.forwarder = new Forwarder();
 	}
+
+	public void quit() {
+		forwarder.quit();
+	}
 	
 	/**
 	 * Server operation

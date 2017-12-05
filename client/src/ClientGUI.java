@@ -163,6 +163,7 @@ public class ClientGUI extends JFrame{
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
                     client.sendCommand("clear");
+                    drawPanel.processCommand("clear");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -203,6 +204,7 @@ public class ClientGUI extends JFrame{
             public void windowClosing(WindowEvent e) {
                 // Notify parent of close attempt
                 try {
+                    server.quit();
                     client.sendCommand("quit");
 
                 } catch (IOException e1) {
@@ -255,6 +257,9 @@ public class ClientGUI extends JFrame{
     }
 
     public void process(String command) {
+        if (command.equals("quit")) {
+            System.exit(0);
+        }
         drawPanel.processCommand(command);
     }
 
