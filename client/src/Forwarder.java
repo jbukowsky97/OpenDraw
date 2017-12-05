@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.ListIterator;
+import java.util.*;
 
 /**
  * This class is responsible for forwarding all messages to other messages
@@ -13,14 +11,14 @@ public class Forwarder extends Thread {
 	private ArrayList<ClientHandler> clients;
 	
 	/** List of updaes to forward to clients */
-	private LinkedList<String> updates;
+	private List<String> updates;
 	
 	/**
 	 * Creates a Forwarder object
 	 */
 	public Forwarder() {
 		clients = new ArrayList<>();
-		updates = new LinkedList<String>();
+		updates = Collections.synchronizedList(new LinkedList<String>());
 	}
 	
 	/**
@@ -57,11 +55,13 @@ public class Forwarder extends Thread {
 		while (true) {
 			// Wait for the there to be updates to send
 			while (updates.size() == 0);
-			
-			String update = updates.pop();
-			
+
+			String update = updates.get(0) + "\n";
+			updates.remove(0);
+
 			for (ListIterator<ClientHandler> iter = clients.listIterator(); iter.hasNext();) {
 				try {
+					System.out.println("SENDING:\t" + update);
 					iter.next().getOutputStream().writeBytes(update);
 				} catch (Exception e) {
 					// Fail quietly

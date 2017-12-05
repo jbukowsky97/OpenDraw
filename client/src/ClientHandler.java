@@ -82,7 +82,6 @@ public class ClientHandler extends Thread {
 //					int red = Integer.parseInt(params[5]);
 //					int green = Integer.parseInt(params[6]);
 //					int blue = Integer.parseInt(params[7]);
-					
 					forwarder.addUpdate(command);
 				} else if (params[0].toLowerCase().equals("clear")) {
 					forwarder.addUpdate(command);
@@ -103,6 +102,7 @@ public class ClientHandler extends Thread {
 	public ClientHandler(Socket controlSocket, Forwarder forwarder) {
 		this.controlSocket = controlSocket;
 		this.forwarder = forwarder;
+		forwarder.subscribeClient(this);
 
 		try {
 			outToClient = new DataOutputStream(controlSocket.getOutputStream());

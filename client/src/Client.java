@@ -39,6 +39,7 @@ public class Client {
 
     public void sendCommand(String command) throws IOException {
         if (running) {
+            System.out.println(command);
             out.writeBytes(command + "\n");
             out.flush();
         }
@@ -46,7 +47,9 @@ public class Client {
 
     private void listen() throws IOException {
         while (running) {
+            while (!in.ready());
             String command = in.readLine();
+            System.out.println("RECEIVED:\t" + command);
             clientGUI.process(command);
         }
     }
