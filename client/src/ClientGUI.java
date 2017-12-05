@@ -119,6 +119,7 @@ public class ClientGUI extends JFrame{
                     //String ip = ipText.getText();
                     int port = Integer.parseInt(portText.getText());
                     server = new Server(port);
+                    hostBtn.setEnabled(false);
                     server.start();
                 }
             }
