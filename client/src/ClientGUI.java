@@ -2,10 +2,7 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.io.IOException;
 
 public class ClientGUI extends JFrame{
@@ -33,6 +30,7 @@ public class ClientGUI extends JFrame{
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1000,500);
+        this.setResizable(false);
         JPanel contentPane = new JPanel();
         contentPane.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -197,6 +195,49 @@ public class ClientGUI extends JFrame{
         slider.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
                 DrawPanel.setBrushSize(slider.getValue());
+            }
+        });
+
+        this.addWindowListener(new WindowListener() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                // Notify parent of close attempt
+                try {
+                    client.sendCommand("quit");
+
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+                // Do nothing
+            }
+
+            @Override
+            public void windowOpened(WindowEvent e) {
+                // Do nothing
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+                // Do nothing
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+                // Do nothing
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+                // Do nothing
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+                // Do nothing
             }
         });
 
