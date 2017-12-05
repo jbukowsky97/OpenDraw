@@ -61,6 +61,7 @@ public class Forwarder extends Thread {
 			String update = updates.pop();
 			
 			for (ListIterator<ClientHandler> iter = clients.listIterator(); iter.hasNext();) {
+				System.out.println("Sending: " + iter.next().getIP());
 				try {
 					iter.next().getOutputStream().writeBytes(update);
 				} catch (Exception e) {

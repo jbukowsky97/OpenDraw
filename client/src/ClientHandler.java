@@ -19,6 +19,15 @@ public class ClientHandler extends Thread {
 	private Forwarder forwarder;
 	
 	/**
+	 * Provides the clients IP address
+	 * 
+	 * @return The IP address of the client
+	 */
+	public String getIP() {
+		return controlSocket.getInetAddress().toString();
+	}
+	
+	/**
 	 * Provides the OutputStream of to this client
 	 * 
 	 * @return The DataOutputStream of this object
