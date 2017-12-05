@@ -133,10 +133,21 @@ public class DrawPanel extends JPanel implements MouseMotionListener, MouseListe
         x2 = e.getX();
         y2 = e.getY();
 
+        int cX1 = x1;
+        int cY1 = y1;
+        int cX2 = x2;
+        int cY2 = y2;
+        if (!myCommand.equals("line")) {
+        	cX1 = (x1 - brushSize / 2);
+        	cY1 = (y1 - brushSize / 2);
+        	cX2 = (x2 - brushSize / 2);
+        	cY2 = (y2 - brushSize / 2);
+        }
+        
         try {
-            client.sendCommand(myCommand + " " + (x1 - brushSize / 2) + " " + (y1 - brushSize / 2) + " " + (x2 - brushSize / 2) + " " + (y2 - brushSize / 2) + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue() + " " + brushSize);
+            client.sendCommand(myCommand + " " + cX1 + " " + cY1 + " " + cX2 + " " + cY2 + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue() + " " + brushSize);
             //System.out.println("line " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue());
-            processCommand(myCommand + " " + (x1 - brushSize / 2) + " " + (y1 - brushSize / 2) + " " + (x2 - brushSize / 2) + " " + (y2 - brushSize / 2) + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue() + " " + brushSize);
+            processCommand(myCommand + " " + cX1 + " " + cY1 + " " + cX2 + " " + cY2 + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue() + " " + brushSize);
         } catch (IOException e1) {
             //e1.printStackTrace();
         }
@@ -164,12 +175,23 @@ public class DrawPanel extends JPanel implements MouseMotionListener, MouseListe
         y1 = e.getY();
         x2 = e.getX();
         y2 = e.getY();
+        
+        int cX1 = x1;
+        int cY1 = y1;
+        int cX2 = x2;
+        int cY2 = y2;
+        if (!myCommand.equals("line")) {
+        	cX1 = (x1 - brushSize / 2);
+        	cY1 = (y1 - brushSize / 2);
+        	cX2 = (x2 - brushSize / 2);
+        	cY2 = (y2 - brushSize / 2);
+        }
 
 
         try {
-            client.sendCommand(myCommand + " " + (x1 - brushSize / 2) + " " + (y1 - brushSize / 2) + " " + (x2 - brushSize / 2) + " " + (y2 - brushSize / 2) + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue() + " " + brushSize);
+            client.sendCommand(myCommand + " " + cX1 + " " + cY1 + " " + cX2 + " " + cY2 + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue() + " " + brushSize);
             //System.out.println("line " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue());
-            processCommand(myCommand + " " + (x1 - brushSize / 2) + " " + (y1 - brushSize / 2) + " " + (x2 - brushSize / 2) + " " + (y2 - brushSize / 2) + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue() + " " + brushSize);
+            processCommand(myCommand + " " + cX1 + " " + cY1 + " " + cX2 + " " + cY2 + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue() + " " + brushSize);
         } catch (IOException e1) {
             //e1.printStackTrace();
         }
