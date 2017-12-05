@@ -75,7 +75,7 @@ public class Forwarder extends Thread {
 						// Fail quietly
 					}
 				}
-				System.out.println("NUM CLIEnts");
+				System.out.println("NUM CLIEnts\t" + numClients);
 			}
 		}
 	}
