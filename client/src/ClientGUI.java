@@ -205,7 +205,9 @@ public class ClientGUI extends JFrame{
                 // Notify parent of close attempt
                 try {
                     client.sendCommand("quit");
-                    server.quit();
+                    if (server != null) {
+                        server.quit();
+                    }
 
                 } catch (IOException e1) {
                     e1.printStackTrace();
