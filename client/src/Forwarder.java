@@ -11,14 +11,18 @@ public class Forwarder extends Thread {
 	private ArrayList<ClientHandler> clients;
 	
 	/** List of updaes to forward to clients */
-	private List<String> updates;
+	private LinkedList<String> updates;
+
+	/** List of prospective changes to updates */
+	private List<String> prospective;
 	
 	/**
 	 * Creates a Forwarder object
 	 */
 	public Forwarder() {
 		clients = new ArrayList<>();
-		updates = Collections.synchronizedList(new LinkedList<String>());
+		updates = new LinkedList<>();
+		prospective = Collections.synchronizedList(new LinkedList<String>());
 	}
 	
 	/**
@@ -45,7 +49,7 @@ public class Forwarder extends Thread {
 	 * @param update String of the update to forward to clients
 	 */
 	public synchronized void addUpdate(String update) {
-		updates.add(update);
+		prospective.add(update);
 	}
 	
 	/**
@@ -54,17 +58,20 @@ public class Forwarder extends Thread {
 	public void run() {
 		while (true) {
 			// Add any new updates
-			while (updates.size() == 0);
-			// Forward all updates
-			String update = updates.get(0) + "\n";
-			updates.remove(0);
+			updates.addAll(prospective);
+			prospective.clear();
 
-			for (ListIterator<ClientHandler> iter = clients.listIterator(); iter.hasNext();) {
-				try {
-					System.out.println("SENDING:\t" + update);
-					iter.next().getOutputStream().writeBytes(update);
-				} catch (Exception e) {
-					// Fail quietly
+			// Forward all updates
+			while (updates.size() > 0) {
+				String update = updates.pop() + "\n";
+
+				for (ListIterator<ClientHandler> iter = clients.listIterator(); iter.hasNext();) {
+					try {
+//						System.out.println("SENDING:\t" + update);
+						iter.next().getOutputStream().writeBytes(update);
+					} catch (Exception e) {
+						// Fail quietly
+					}
 				}
 			}
 		}
