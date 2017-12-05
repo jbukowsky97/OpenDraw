@@ -40,7 +40,7 @@ public class Client {
         t.start();
     }
 
-    public void sendCommand(String command) throws IOException {
+    public synchronized void sendCommand(String command) throws IOException {
         if (running) {
             out.writeBytes(command + "\n");
             out.flush();
