@@ -146,10 +146,17 @@ public class DrawPanel extends JPanel implements MouseMotionListener, MouseListe
     public void mousePressed(MouseEvent e) {
         x1 = e.getX();
         y1 = e.getY();
-
         x2 = e.getX();
         y2 = e.getY();
 
+
+        try {
+            client.sendCommand(myCommand + " " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue() + " " + brushSize);
+            //System.out.println("line " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue());
+            processCommand(myCommand + " " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue() + " " + brushSize);
+        } catch (IOException e1) {
+            //e1.printStackTrace();
+        }
 
     }
 
