@@ -14,26 +14,33 @@ public class DrawPanel extends JPanel implements MouseMotionListener, MouseListe
 
     private String command;
 
+    private boolean first;
+
 
     public DrawPanel(Client client){
 
         this.color = Color.BLACK;
         this.client = client;
 
+        this.setOpaque(true);
         this.setBackground(Color.WHITE);
+        this.setForeground(Color.WHITE);
 
         addMouseListener(this);
         addMouseMotionListener(this);
 
         this.setVisible(true);
 
-
+        first = true;
 
     }
 
 
     public void paintComponent(Graphics g) {
-        super.paintComponent(g);
+        if (first) {
+            super.paintComponent(g);
+            first = false;
+        }
         if (command == null) {
 
         }else if (command.startsWith("line")) {
@@ -69,6 +76,8 @@ public class DrawPanel extends JPanel implements MouseMotionListener, MouseListe
 
         try {
             client.sendCommand("line " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue());
+            System.out.println("line " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue());
+            //processCommand("line " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue());
         } catch (IOException e1) {
             e1.printStackTrace();
         }
